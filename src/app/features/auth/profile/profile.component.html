@@ -1,83 +1,62 @@
-<h2>Profile</h2>
-<button type="button" (click)="deleteProfile()">Delete Profile</button>
-<form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+<main class="profile-page">
+    <div class="container">
+        <div class="profile-header">
+            <h2 class="profile-title">Career Settings</h2>
 
-    <div>
-        <label for="firstName">First Name</label>
-        <input formControlName="firstName" placeholder="First name">
-        @if (profileForm.controls['firstName'].invalid &&
-        (profileForm.controls['firstName'].touched ||
-        profileForm.controls['firstName'].dirty)) {
-        <div>
-            @if (profileForm.controls['firstName'].errors?.['required']) {
-            <span>firstName is required</span>
-            }
-            @if (profileForm.controls['firstName'].errors?.['minlength']) {
-            <span>first Name can only have 3 to 20 characters</span>
-            }
-            @if (profileForm.controls['firstName'].errors?.['maxlength']) {
-            <span>first Name can only have 3 to 20 characters</span>
-            }
+            <button type="button" class="btn-delete" (click)="deleteProfile()">
+                <i class="icon-trash"></i> Delete Account
+            </button>
         </div>
-        }
-    </div>
-    <div>
-        <label for="lastName">Last Name</label>
-        <input formControlName="lastName" placeholder="Last name">
-        @if (profileForm.controls['lastName'].invalid &&
-        (profileForm.controls['lastName'].touched ||
-        profileForm.controls['lastName'].dirty)) {
-        <div>
-            @if (profileForm.controls['lastName'].errors?.['required']) {
-            <span>lastName is required</span>
-            }
-            @if (profileForm.controls['lastName'].errors?.['minlength']) {
-            <span>Last Name can only have 3 to 20 characters</span>
-            }
-            @if (profileForm.controls['lastName'].errors?.['maxlength']) {
-            <span>Last Name can only have 3 to 20 characters</span>
-            }
-        </div>
-        }
-    </div>
-    <div>
-        <label for="email">Email</label>
-        <input formControlName="email" placeholder="Email">
-        @if (profileForm.controls['email'].invalid &&
-        (profileForm.controls['email'].touched ||
-        profileForm.controls['email'].dirty)) {
-        <div>
-            @if (profileForm.controls['email'].errors?.['required']) {
-            <span>Email is required</span>
-            }
-            @if (profileForm.controls['email'].errors?.['email']) {
-            <span>Email format is invalid</span>
-            }
-        </div>
-        }
-    </div>
-    <div>
-        <label for="password">Password</label>
-        <input formControlName="password" placeholder="Password">
-        @if (profileForm.controls['password'].invalid &&
-        (profileForm.controls['password'].touched ||
-        profileForm.controls['password'].dirty)) {
-        <div>
-            @if (profileForm.controls['password'].errors?.['required']) {
-            <span>Password is required</span>
-            }
-            @if (profileForm.controls['password'].errors?.['minlength']) {
-            <span>Password must has 4 to 12 characters</span>
-            }
-            @if (profileForm.controls['password'].errors?.['maxlength']) {
-            <span>Password must has 4 to 12 characters</span>
-            }
-        </div>
-        }
-    </div>
 
-    <button type="submit" [disabled]="profileForm.invalid">
-        Update Profile
-    </button>
+        <div class="profile-card glass">
+            <form [formGroup]="profileForm" (ngSubmit)="updateProfile()" class="profile-form">
+                <div class="form-section">
+                    <h3>Personal Information</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input formControlName="firstName">
+                            @if (profileForm.controls['firstName'].invalid && profileForm.controls['firstName'].touched)
+                            {
+                            <span class="error-msg">Required (3-20 chars)</span>
+                            }
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input formControlName="lastName">
+                            @if (profileForm.controls['lastName'].invalid && profileForm.controls['lastName'].touched) {
+                            <span class="error-msg">Required (3-20 chars)</span>
+                            }
+                        </div>
+                    </div>
+                </div>
 
-</form>
+                <div class="form-section">
+                    <h3>Security</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input formControlName="email" type="email">
+                            @if (profileForm.controls['email'].invalid && profileForm.controls['email'].touched) {
+                            <span class="error-msg">Invalid email</span>
+                            }
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input formControlName="password" type="password">
+                            @if (profileForm.controls['password'].invalid && profileForm.controls['password'].touched) {
+                            <span class="error-msg">Password (4-12 chars)</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary" [disabled]="profileForm.invalid">
+                        Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>

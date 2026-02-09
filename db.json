@@ -1,5 +1,36 @@
 {
-  "users": [],
-  "favoritesOffers": [],
-  "candidatures": []
+  "users": [
+    {
+      "firstName": "Ayoub",
+      "lastName": "Benmansour",
+      "email": "ayoub1benmansour@gmail.com",
+      "password": "1111",
+      "id": 1
+    }
+  ],
+  "favoritesOffers": [
+    {
+      "id": 1,
+      "userId": 1,
+      "offerId": 101,
+      "title": "Développeur Angular",
+      "company": "Entreprise A",
+      "location": "Casablanca"
+    }
+  ],
+  "candidatures": [
+    {
+      "id": 1,
+      "userId": 1,
+      "offerId": "101",
+      "apiSource": "adzuna",
+      "title": "Développeur Angular",
+      "company": "Entreprise A",
+      "location": "Casablanca",
+      "url": "https://...",
+      "status": "en_attente",
+      "notes": "Candidature envoyée le 10/02/2025. Relancer dans 2 semaines.",
+      "dateAdded": "2026-02-10T10:30:00Z"
+    }
+  ]
 }
