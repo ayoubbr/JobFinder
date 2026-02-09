@@ -1,5 +1,6 @@
+import { UserService } from './../../core/services/user.service';
 import { Component } from '@angular/core';
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -9,5 +10,15 @@ import { RouterLink } from "@angular/router";
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+
+  constructor(
+    public userService: UserService,
+    private router: Router
+  ) { }
+
+  logout(): void {
+    this.userService.logout();
+    this.router.navigate(['/login']);
+  }
 
 }

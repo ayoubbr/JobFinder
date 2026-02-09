@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../core/services/user.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [],
+  standalone: true,
+  imports: [ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -12,14 +14,15 @@ export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
 
-  constructor(private userService: UserService, private fb: FormBuilder) {
+  constructor(private userService: UserService,
+    private fb: FormBuilder,
+    private router: Router) {
   }
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: [''],
-      password: ['']
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(12)]]
     })
-
   }
 
 
@@ -29,6 +32,7 @@ export class LoginComponent implements OnInit {
     this.userService.login(email, password).subscribe({
       next: user => {
         console.log('Logged in user:', user);
+        this.router.navigate(['profile'])
       },
       error: err => {
         alert(err.message);

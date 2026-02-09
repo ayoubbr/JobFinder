@@ -1,1 +1,42 @@
-<p>login works!</p>
+<h2>Login Form</h2>
+
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+
+    <div>
+        <label for="email">Email</label>
+        <input type="email" formControlName="email" />
+        @if (loginForm.controls['email'].invalid &&(
+        loginForm.controls['email'].dirty || loginForm.controls['email'].touched)) {
+        <div>
+            @if (loginForm.controls['email'].errors?.['required']) {
+            <span>Email is required</span>
+            }
+            @if (loginForm.controls['email'].errors?.['email']) {
+            <span>Email format is invalid</span>
+            }
+        </div>
+        }
+    </div>
+
+    <div>
+        <label for="password">Password</label>
+        <input type="password" formControlName="password" />
+        @if (loginForm.controls['password'].invalid &&(
+        loginForm.controls['password'].dirty || loginForm.controls['password'].touched)) {
+        <div>
+            @if (loginForm.controls['password'].errors?.['required']) {
+            <span>Password is required</span>
+            }
+            @if (loginForm.controls['password'].errors?.['minlength']) {
+            <span>Password is invalid</span>
+            }
+            @if (loginForm.controls['password'].errors?.['maxlength']) {
+            <span>Password is invalid</span>
+            }
+        </div>
+        }
+    </div>
+
+    <button type="submit">Login</button>
+
+</form>

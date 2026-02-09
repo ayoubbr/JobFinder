@@ -15,7 +15,6 @@ export class UserService {
 
   constructor(private http: HttpClient, private localStorageService: LocalStorageService) { }
 
-
   register(user: User): Observable<User> {
     return this.http.get<User[]>(`${this.url}?email=${user.email}`).pipe(
       map(users => {
@@ -44,7 +43,6 @@ export class UserService {
         })
       );
   }
-
 
   logout(): void {
     this.localStorageService.removeUserData(this.STORAGE_KEY);
