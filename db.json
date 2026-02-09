@@ -27,6 +27,20 @@
       "email": "ayoub1benmansour@gmail.com",
       "password": "ssss",
       "id": 4
+    },
+    {
+      "firstName": "Ayoub",
+      "lastName": "Benmansour",
+      "email": "ayoub1benmansour@gmail.com",
+      "password": "2222",
+      "id": 5
+    },
+    {
+      "firstName": "Ayoub",
+      "lastName": "Benmansour",
+      "email": "ayoub1benmansour1@gmail.com",
+      "password": "2222",
+      "id": 6
     }
   ],
   "favoritesOffers": [

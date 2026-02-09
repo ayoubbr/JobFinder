@@ -2,6 +2,7 @@ import { UserService } from './../../../core/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LocalStorageService } from '../../../core/services/local-storage.service';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private userService: UserService,
-    private router: Router) { }
+    private router: Router,
+    private localStroageService: LocalStorageService) { }
 
 
   ngOnInit(): void {
@@ -41,11 +43,12 @@ export class RegisterComponent implements OnInit {
       password: this.registerForm.value.password
     }
 
-    this.userService.register(user as any).subscribe(
+    this.userService.register(this.registerForm.value).subscribe(
       {
         next: (createdUser) => {
           console.log('User created: ', createdUser);
-          this.router.navigate([''])
+          this.registerForm.reset();
+          this.router.navigate(['']);
         },
         error: (err) => {
           console.error('Registration failed', err);
