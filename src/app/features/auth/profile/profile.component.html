@@ -1,1 +1,83 @@
 <h2>Profile</h2>
+
+<form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+
+    <div>
+        <label for="firstName">First Name</label>
+        <input formControlName="firstName" placeholder="First name">
+        @if (profileForm.controls['firstName'].invalid &&
+        (profileForm.controls['firstName'].touched ||
+        profileForm.controls['firstName'].dirty)) {
+        <div>
+            @if (profileForm.controls['firstName'].errors?.['required']) {
+            <span>firstName is required</span>
+            }
+            @if (profileForm.controls['firstName'].errors?.['minlength']) {
+            <span>first Name can only have 3 to 20 characters</span>
+            }
+            @if (profileForm.controls['firstName'].errors?.['maxlength']) {
+            <span>first Name can only have 3 to 20 characters</span>
+            }
+        </div>
+        }
+    </div>
+    <div>
+        <label for="lastName">Last Name</label>
+        <input formControlName="lastName" placeholder="Last name">
+        @if (profileForm.controls['lastName'].invalid &&
+        (profileForm.controls['lastName'].touched ||
+        profileForm.controls['lastName'].dirty)) {
+        <div>
+            @if (profileForm.controls['lastName'].errors?.['required']) {
+            <span>lastName is required</span>
+            }
+            @if (profileForm.controls['lastName'].errors?.['minlength']) {
+            <span>Last Name can only have 3 to 20 characters</span>
+            }
+            @if (profileForm.controls['lastName'].errors?.['maxlength']) {
+            <span>Last Name can only have 3 to 20 characters</span>
+            }
+        </div>
+        }
+    </div>
+    <div>
+        <label for="email">Email</label>
+        <input formControlName="email" placeholder="Email">
+        @if (profileForm.controls['email'].invalid &&
+        (profileForm.controls['email'].touched ||
+        profileForm.controls['email'].dirty)) {
+        <div>
+            @if (profileForm.controls['email'].errors?.['required']) {
+            <span>Email is required</span>
+            }
+            @if (profileForm.controls['email'].errors?.['email']) {
+            <span>Email format is invalid</span>
+            }
+        </div>
+        }
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input formControlName="password" placeholder="Password">
+        @if (profileForm.controls['password'].invalid &&
+        (profileForm.controls['password'].touched ||
+        profileForm.controls['password'].dirty)) {
+        <div>
+            @if (profileForm.controls['password'].errors?.['required']) {
+            <span>Password is required</span>
+            }
+            @if (profileForm.controls['password'].errors?.['minlength']) {
+            <span>Password must has 4 to 12 characters</span>
+            }
+            @if (profileForm.controls['password'].errors?.['maxlength']) {
+            <span>Password must has 4 to 12 characters</span>
+            }
+        </div>
+        }
+    </div>
+
+    <button type="submit" [disabled]="profileForm.invalid">
+        Update Profile
+    </button>
+
+</form>

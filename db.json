@@ -9,38 +9,17 @@
     },
     {
       "firstName": "Ayoub",
-      "lastName": "Benmansour",
+      "lastName": "Benmansour99",
       "email": "ayoub1benmansour@gmail.com",
-      "password": "1111",
+      "password": "2222",
       "id": 2
     },
     {
-      "firstName": "Sint sunt ullam ut v",
-      "lastName": "Autem qui sit do de",
+      "firstName": "Yassir",
+      "lastName": "Ouahmane",
       "email": "Et@gmail.com",
-      "password": "Autem",
+      "password": "3333",
       "id": 3
-    },
-    {
-      "firstName": "Ayoub",
-      "lastName": "Benmansour",
-      "email": "ayoub1benmansour@gmail.com",
-      "password": "ssss",
-      "id": 4
-    },
-    {
-      "firstName": "Ayoub",
-      "lastName": "Benmansour",
-      "email": "ayoub1benmansour@gmail.com",
-      "password": "2222",
-      "id": 5
-    },
-    {
-      "firstName": "Ayoub",
-      "lastName": "Benmansour",
-      "email": "ayoub1benmansour1@gmail.com",
-      "password": "2222",
-      "id": 6
     }
   ],
   "favoritesOffers": [

@@ -44,6 +44,13 @@ export class UserService {
       );
   }
 
+  updateUser(user: User): Observable<User> {
+    if (!user.id) {
+      throw new Error('User ID is missing');
+    }
+    return this.http.patch<User>(`${this.url}/${user.id}`, user);
+  }
+
   logout(): void {
     this.localStorageService.removeUserData(this.STORAGE_KEY);
   }
@@ -51,6 +58,10 @@ export class UserService {
   getCurrentUser(): User | null {
     const user = this.localStorageService.getUserData(this.STORAGE_KEY);
     return user;
+  }
+
+  setCurrentUser(user: User): void {
+    this.localStorageService.setUserData('currentUser', user);
   }
 
   isAuthenticated(): boolean {
