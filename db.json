@@ -20,6 +20,13 @@
       "email": "Et@gmail.com",
       "password": "Autem",
       "id": 3
+    },
+    {
+      "firstName": "Ayoub",
+      "lastName": "Benmansour",
+      "email": "ayoub1benmansour@gmail.com",
+      "password": "ssss",
+      "id": 4
     }
   ],
   "favoritesOffers": [

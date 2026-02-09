@@ -1,6 +1,7 @@
 import { UserService } from './../../../core/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -13,8 +14,9 @@ export class RegisterComponent implements OnInit {
 
   registerForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private userService: UserService) {
-  }
+  constructor(private fb: FormBuilder,
+    private userService: UserService,
+    private router: Router) { }
 
 
   ngOnInit(): void {
@@ -27,9 +29,6 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-
-    console.log('ssss');
-    
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
       return;
@@ -46,6 +45,7 @@ export class RegisterComponent implements OnInit {
       {
         next: (createdUser) => {
           console.log('User created: ', createdUser);
+          this.router.navigate([''])
         },
         error: (err) => {
           console.error('Registration failed', err);
