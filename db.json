@@ -1,4 +1,27 @@
 {
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Ayoub",
+      "lastName": "Benmansour",
+      "email": "obitoub99@gmail.com",
+      "password": "1111"
+    },
+    {
+      "firstName": "Ayoub",
+      "lastName": "Benmansour",
+      "email": "ayoub1benmansour@gmail.com",
+      "password": "1111",
+      "id": 2
+    },
+    {
+      "firstName": "Sint sunt ullam ut v",
+      "lastName": "Autem qui sit do de",
+      "email": "Et@gmail.com",
+      "password": "Autem",
+      "id": 3
+    }
+  ],
   "favoritesOffers": [
     {
       "id": 1,

@@ -1,11 +1,11 @@
-import { NgIf } from '@angular/common';
+import { UserService } from './../../../core/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf],
+  imports: [ReactiveFormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
 
   registerForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private userService: UserService) {
   }
 
 
@@ -27,7 +27,31 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    this.registerForm.valid ? console.log(this.registerForm.value) : "no data in";
+
+    console.log('ssss');
+    
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
+      return;
+    }
+
+    const user = {
+      firstName: this.registerForm.value.firstName,
+      lastName: this.registerForm.value.lastName,
+      email: this.registerForm.value.email,
+      password: this.registerForm.value.password
+    }
+
+    this.userService.register(user as any).subscribe(
+      {
+        next: (createdUser) => {
+          console.log('User created: ', createdUser);
+        },
+        error: (err) => {
+          console.error('Registration failed', err);
+        }
+      }
+    );
   }
 
 }
