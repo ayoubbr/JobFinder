@@ -3,22 +3,28 @@ import { RegisterComponent } from './features/auth/register/register.component';
 import { LoginComponent } from './features/auth/login/login.component';
 import { ProfileComponent } from './features/auth/profile/profile.component';
 import { HomeComponent } from './shared/home/home.component';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
     {
         path: '',
-        component: HomeComponent
+        loadComponent: () => import('./shared/home/home.component')
+            .then(m => m.HomeComponent),
     },
     {
         path: 'register',
-        component: RegisterComponent
+        loadComponent: () => import('./features/auth/register/register.component')
+            .then(m => m.RegisterComponent),
     },
     {
         path: 'login',
-        component: LoginComponent
+        loadComponent: () => import('./features/auth/login/login.component')
+            .then(m => m.LoginComponent),
     },
     {
         path: 'profile',
-        component: ProfileComponent
+        loadComponent: () => import('./features/auth/profile/profile.component')
+            .then(m => m.ProfileComponent),
+        canActivate: [authGuard]
     }
 ];
