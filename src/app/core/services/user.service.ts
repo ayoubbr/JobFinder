@@ -67,4 +67,8 @@ export class UserService {
   isAuthenticated(): boolean {
     return !!this.getCurrentUser();
   }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.url}/${id}`);
+  }
 }

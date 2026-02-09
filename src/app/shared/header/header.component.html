@@ -10,9 +10,11 @@
             <li>
                 <a routerLink="login">Login</a>
             </li>
+            @if (userService.isAuthenticated()) {
             <li>
                 <a routerLink="profile">Profile</a>
             </li>
+            }
             @if (userService.isAuthenticated()) {
             <li>
                 <button type="button" (click)="logout()">Logout</button>

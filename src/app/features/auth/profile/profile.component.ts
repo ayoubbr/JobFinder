@@ -2,6 +2,7 @@ import { User } from './../../../core/models/user.model';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../../core/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -12,12 +13,12 @@ import { UserService } from '../../../core/services/user.service';
 })
 export class ProfileComponent implements OnInit {
 
-
   profileForm!: FormGroup;
   currentUser!: User;
 
   constructor(private fb: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {
   }
 
@@ -66,5 +67,19 @@ export class ProfileComponent implements OnInit {
       }
     })
   }
+
+  deleteProfile() {
+    this.userService.delete(this.currentUser.id!).subscribe({
+      next: () => {
+        alert('User deleted successfully');
+        this.userService.logout();
+        this.router.navigate(['']);
+      },
+      error: () => {
+        console.error('Something was wrong');
+      }
+    })
+  }
+
 
 }
