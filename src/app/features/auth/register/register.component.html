@@ -1,1 +1,82 @@
-<p>register works!</p>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+    <div>
+        <label>First Name:</label>
+        <input formControlName="firstName">
+        @if (registerForm.controls['firstName'].invalid &&
+        (registerForm.controls['firstName'].touched ||
+        registerForm.controls['firstName'].dirty)) {
+        <div>
+            @if (registerForm.controls['firstName'].errors?.['required']) {
+            <span>firstName is required</span>
+            }
+            @if (registerForm.controls['firstName'].errors?.['minlength']) {
+            <span>first Name can only have 3 to 20 characters</span>
+            }
+            @if (registerForm.controls['firstName'].errors?.['maxlength']) {
+            <span>first Name can only have 3 to 20 characters</span>
+            }
+        </div>
+        }
+    </div>
+
+    <div>
+        <label>Last Name:</label>
+        <input formControlName="lastName">
+        @if (registerForm.controls['lastName'].invalid &&
+        (registerForm.controls['lastName'].touched ||
+        registerForm.controls['lastName'].dirty)) {
+        <div>
+            @if (registerForm.controls['lastName'].errors?.['required']) {
+            <span>lastName is required</span>
+            }
+            @if (registerForm.controls['lastName'].errors?.['minlength']) {
+            <span>Last Name can only have 3 to 20 characters</span>
+            }
+            @if (registerForm.controls['lastName'].errors?.['maxlength']) {
+            <span>Last Name can only have 3 to 20 characters</span>
+            }
+        </div>
+        }
+    </div>
+
+    <div>
+        <label>Email:</label>
+        <input formControlName="email">
+        @if (registerForm.controls['email'].invalid &&
+        (registerForm.controls['email'].touched ||
+        registerForm.controls['email'].dirty)) {
+        <div>
+            @if (registerForm.controls['email'].errors?.['required']) {
+            <span>Email is required</span>
+            }
+            @if (registerForm.controls['email'].errors?.['email']) {
+            <span>Email format is invalid</span>
+            }
+        </div>
+        }
+    </div>
+
+    <div>
+        <label>Password:</label>
+        <input formControlName="password">
+        @if (registerForm.controls['password'].invalid &&
+        (registerForm.controls['password'].touched ||
+        registerForm.controls['password'].dirty)) {
+        <div>
+            @if (registerForm.controls['password'].errors?.['required']) {
+            <span>Password is required</span>
+            }
+            @if (registerForm.controls['password'].errors?.['minlength']) {
+            <span>Password must has 4 to 12 characters</span>
+            }
+            @if (registerForm.controls['password'].errors?.['maxlength']) {
+            <span>Password must has 4 to 12 characters</span>
+            }
+        </div>
+        }
+    </div>
+
+
+    <button type="submit" [disabled]="!registerForm.valid">Submit</button>
+</form>
