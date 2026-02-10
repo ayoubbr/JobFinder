@@ -25,12 +25,7 @@ export class JobComponent implements OnInit {
 
   totalPages = 0;
 
-  // descending = true;
-  // pageCount = 0;
-
-
-  constructor(private route: ActivatedRoute,
-    private jobService: JobService) {
+  constructor(private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -64,55 +59,17 @@ export class JobComponent implements OnInit {
     const start = this.page * this.pageSize;
     const end = start + this.pageSize;
 
-    this.jobs = filtered.slice(start, end);
+    this.jobs = filtered.sort((a, b) => {
+      const dateA = Date.parse(a.publication_date.replace(' ', 'T'));
+      const dateB = Date.parse(b.publication_date.replace(' ', 'T'));
+      return dateB - dateA;
+    }).slice(start, end);
   }
-
-
-
-  // applyTitleFilter() {
-
-  //   let filtered = this.allJobs;
-
-  //   const value = this.filterByTitle.toLowerCase().trim();
-
-
-  //   if (value) {
-  //     filtered = filtered.filter(job => job.name.toLowerCase().includes(value));
-  //   }
-
-  //   const start = this.page * this.pageSize; // 0
-  //   const end = start + this.pageSize; // 25
-  //   this.jobs = filtered.slice(start, end); // [ 0, 25 ]
-
-  //   this.totalPages = Math.ceil(filtered.length / this.pageSize);
-
-  // }
-
-
-
-  // applyLocationFilter() {
-  //   const value = this.filterByLocation.toLowerCase().trim();
-
-
-  //   if (!value) {
-  //     return;
-  //   }
-  //   this.jobService.getAll(this.page, false, value).subscribe({
-  //     next: (res) => {
-  //       this.allJobs = res.results;
-  //       this.applyTitleFilter();
-  //     },
-  //     error: (err) => {
-  //       console.error('Something is wrong: ', err);
-  //     }
-  //   })
-  // }
 
   onFilterChange() {
     this.page = 0;
     this.applyFilters();
   }
-
 
   goToPage(pageNumber: number) {
     if (pageNumber < 0 || pageNumber >= this.totalPages) {
