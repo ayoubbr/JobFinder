@@ -4,6 +4,7 @@ import { LoginComponent } from './features/auth/login/login.component';
 import { ProfileComponent } from './features/auth/profile/profile.component';
 import { HomeComponent } from './shared/home/home.component';
 import { authGuard } from './core/guards/auth.guard';
+import { JobsResolver } from './core/services/job-resolver.service';
 
 export const routes: Routes = [
     {
@@ -26,5 +27,10 @@ export const routes: Routes = [
         loadComponent: () => import('./features/auth/profile/profile.component')
             .then(m => m.ProfileComponent),
         canActivate: [authGuard]
+    },
+    {
+        path: 'jobs',
+        loadComponent: () => import('./features/job/job.component').then(m => m.JobComponent),
+        resolve: { jobs: JobsResolver }
     }
 ];

@@ -1,0 +1,40 @@
+<h2>Jobs</h2>
+
+<div>
+    <div>
+        <input type="text" placeholder="Search by title" [(ngModel)]="filterByTitle"
+            (ngModelChange)="onFilterChange()" />
+    </div>
+    <div>
+        <input type="text" placeholder="Search by location" [(ngModel)]="filterByLocation"
+            (ngModelChange)="onFilterChange()">
+    </div>
+    <div>
+        <button (click)="goToPage(page - 1)" [disabled]="page === 0">Prev</button>
+        <span>Page {{page + 1}} / {{totalPages}}</span>
+        <button (click)="goToPage(page + 1)" [disabled]="page + 1 >= totalPages">Next</button>
+    </div>
+
+    @for (job of jobs; track job.id) {
+    <div>
+        <h3>{{job.name}}</h3>
+        <!-- <div [innerHTML]="job.contents"></div> -->
+        <p>Company: {{job.company.name}}</p>
+        <div>Locations: [@for (location of job.locations; track $index; let isLast = $last) {
+            <span>
+                {{location.name}}
+                @if(!isLast){|}
+            </span>
+            }]
+        </div>
+        <p>Date de publication: {{job.publication_date | date:'fullDate'}}</p>
+        <a [href]="job.refs.landing_page" target="_blank">Site source</a>
+        <div><a>Plus de details</a></div>
+        <!-- if authentified -->
+        <div><button>Ajouter au Favoris</button></div>
+        <div><button>Suivre cette candidature</button></div>
+    </div>
+    <hr>
+    }
+
+</div>
