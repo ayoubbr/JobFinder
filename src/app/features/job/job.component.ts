@@ -25,45 +25,51 @@ export class JobComponent implements OnInit {
 
   totalPages = 0;
 
+  isLoading = false;
+
   constructor(private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.allJobs = this.route.snapshot.data['jobs'];
+    const jobs = this.route.snapshot.data['jobs'];
+    this.allJobs = Array.isArray(jobs) ? jobs : [];
     this.applyFilters();
   }
 
   applyFilters() {
-    let filtered = this.allJobs;
+    this.isLoading = true;
+    setTimeout(() => {
+      let filtered = [...this.allJobs];
 
-    const title = this.filterByTitle.toLowerCase().trim();
-    const location = this.filterByLocation.toLowerCase().trim();
+      const title = this.filterByTitle.toLowerCase().trim();
+      const location = this.filterByLocation.toLowerCase().trim();
 
-    if (title) {
-      filtered = filtered.filter(job =>
-        job.name.toLowerCase().includes(title)
+      if (title) {
+        filtered = filtered.filter(job =>
+          job.name.toLowerCase().includes(title)
+        );
+      }
+
+      if (location) {
+        filtered = filtered.filter(job =>
+          job.locations.some(
+            loc => loc.name.toLowerCase().includes(location)
+          )
+        );
+      }
+
+      filtered.sort((a, b) =>
+        new Date(b.publication_date).getTime() - new Date(a.publication_date).getTime()
       );
-    }
 
-    if (location) {
-      filtered = filtered.filter(job =>
-        job.locations.some(
-          loc => loc.name.toLowerCase().includes(location)
-        )
-      );
-    }
+      this.totalPages = Math.ceil(filtered.length / this.pageSize);
 
+      const start = this.page * this.pageSize;
+      const end = start + this.pageSize;
 
-    this.totalPages = Math.ceil(filtered.length / this.pageSize);
-
-    const start = this.page * this.pageSize;
-    const end = start + this.pageSize;
-
-    this.jobs = filtered.sort((a, b) => {
-      const dateA = Date.parse(a.publication_date.replace(' ', 'T'));
-      const dateB = Date.parse(b.publication_date.replace(' ', 'T'));
-      return dateB - dateA;
-    }).slice(start, end);
+      this.jobs = filtered.slice(start, end);
+      this.isLoading = false;
+    }, 1000);
   }
 
   onFilterChange() {

@@ -20,7 +20,7 @@ export class JobService {
     }
 
 
-    return this.http.get<JobResponse>(this.url, { params });
+    return this.http.get<JobResponse>(this.url, { params } );
   }
 
 }
