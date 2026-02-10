@@ -1,27 +1,25 @@
-<header class="header">
-    <div class="container header-content">
-        <div class="logo" routerLink="">JobFinder</div>
-
-
-        <nav class="nav">
-            <ul class="nav-list">
-                <li><a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
-                @if (!userService.isAuthenticated()) {
-                <li><a routerLink="register" routerLinkActive="active">Register</a></li>
-                }
-                @if (userService.isAuthenticated()) {
-                <li><a routerLink="profile" routerLinkActive="active">Profile</a></li>
-                }
-            </ul>
-        </nav>
-
-        <div class="auth-actions">
-            @if (!userService.isAuthenticated()) {
-            <a routerLink="login" class="login-link">Log in</a>
-            <a routerLink="register" class="btn-primary">Sign up</a>
-            } @else {
-            <button type="button" class="btn-outline" (click)="logout()">Logout</button>
+<header>
+    <nav>
+        <ul>
+            <li>
+                <a routerLink="">Home</a>
+            </li>
+            <li>
+                <a routerLink="register">Register</a>
+            </li>
+            <li>
+                <a routerLink="login">Login</a>
+            </li>
+            @if (userService.isAuthenticated()) {
+            <li>
+                <a routerLink="profile">Profile</a>
+            </li>
             }
-        </div>
-    </div>
+            @if (userService.isAuthenticated()) {
+            <li>
+                <button type="button" (click)="logout()">Logout</button>
+            </li>
+            }
+        </ul>
+    </nav>
 </header>

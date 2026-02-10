@@ -69,28 +69,17 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteProfile() {
-    if (!this.currentUser || !this.currentUser.id) {
-      console.error('User ID is missing');
-      return;
-    }
-
-    const confirmation = confirm('Are you sure you want to delete your profile? This action is permanent and will remove all your data.');
-
-    if (confirmation) {
-      this.userService.delete(this.currentUser.id).subscribe({
-        next: () => {
-          alert('User deleted successfully');
-          this.userService.logout();
-          this.router.navigate(['']);
-        },
-        error: (err) => {
-          console.error('Error during deletion:', err);
-          alert('Something went wrong during deletion. Please try again.');
-        }
-      });
-    }
+    this.userService.delete(this.currentUser.id!).subscribe({
+      next: () => {
+        alert('User deleted successfully');
+        this.userService.logout();
+        this.router.navigate(['']);
+      },
+      error: () => {
+        console.error('Something was wrong');
+      }
+    })
   }
-
 
 
 }
