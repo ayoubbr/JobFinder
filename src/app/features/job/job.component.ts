@@ -1,15 +1,15 @@
-import { favotitesReducer } from './../../states/favorites/favorites.reducer';
-import { FavoriteService } from './../../core/services/favorite.service';
-import { Component, NgModule, OnInit } from '@angular/core';
-import { JobService } from '../../core/services/job.service';
-import { Job } from '../../core/models/job.model';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { UserService } from '../../core/services/user.service';
-import { addFavorite } from '../../states/favorites/favorites.actions';
+import { FavoriteService } from '../../core/services/favorite.service';
+import { Job } from '../../core/models/job.model';
+import { addFavorite, loadFavorites, removeFavorite } from '../../states/favorites/favorites.actions';
 import { Favorite } from '../../core/models/favorite.model';
+import { selectFavorites } from '../../states/favorites/favorites.selector';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-job',
@@ -31,17 +31,17 @@ export class JobComponent implements OnInit {
 
   totalPages = 0;
 
+  private store = inject(Store);
   isLoading = false;
-  favorites: Favorite[] = [];
+  favorites$: Observable<Favorite[]> = this.store.select(selectFavorites);
 
   constructor(private route: ActivatedRoute,
-    private store: Store,
     public userService: UserService,
-    private favotiteService: FavoriteService) {
+    private favoriteService: FavoriteService) {
   }
 
   ngOnInit(): void {
-    // this.isLoading = true;
+    this.store.dispatch(loadFavorites());
     const jobs = this.route.snapshot.data['jobs'];
     this.allJobs = Array.isArray(jobs) ? jobs : [];
     this.applyFilters();
@@ -97,9 +97,24 @@ export class JobComponent implements OnInit {
     this.applyFilters();
   }
 
-  addToFavorites(job: Job) {
-    const userId = this.userService.getCurrentUser()?.id!;
-    this.store.dispatch(addFavorite({ userId, job }));
+  toggleFavorite(job: Job, favorites: Favorite[] | null) {
+    if (!favorites) return;
+
+    const existingFavorite = favorites.find(f => f.offerId === job.id);
+    const userId = this.userService.getCurrentUser()?.id;
+
+    if (!userId) return;
+
+    if (existingFavorite) {
+      this.store.dispatch(removeFavorite({ favorite: existingFavorite }));
+    } else {
+      this.store.dispatch(addFavorite({ userId, job }));
+    }
+  }
+
+  isFavorite(jobId: number, favorites: Favorite[] | null): boolean {
+    if (!favorites) return false;
+    return favorites.some(f => f.offerId === jobId);
   }
 
 }

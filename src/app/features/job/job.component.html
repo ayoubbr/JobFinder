@@ -27,7 +27,7 @@
             <!-- <div [innerHTML]="job.contents"></div> -->
 
             <p>Company: {{job.company.name}}</p>
-           
+
             <div>Locations: [@for (location of job.locations; track $index; let isLast = $last) {
                 <span>
                     {{location.name}}
@@ -35,17 +35,21 @@
                 </span>
                 }]
             </div>
-           
+
             <p>Date de publication: {{job.publication_date | date:'fullDate'}}</p>
-            
+
             <a [href]="job.refs.landing_page" target="_blank">Voir l'offre</a>
-          
+
             @if (userService.isAuthenticated()) {
-            <div><button (click)="addToFavorites(job)">Ajouter au Favoris</button></div>
+            <div *ngIf="favorites$ | async as favoritesList">
+                <button (click)="toggleFavorite(job, favoritesList)">
+                    {{ isFavorite(job.id!, favoritesList) ? 'Retirer des Favoris' : 'Ajouter au Favoris' }}
+                </button>
+            </div>
             }
-          
+
             <div><button>Suivre cette candidature</button></div>
-        
+
         </div>
         <hr>
         }
