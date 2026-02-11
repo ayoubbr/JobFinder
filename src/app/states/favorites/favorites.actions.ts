@@ -8,8 +8,8 @@ export const addFavorite = createAction(
 );
 
 export const addFavoriteSuccess = createAction(
-    '[Favorites] Add Favroite Success',
-    props<{ job: Favorite }>()
+    '[Favorites] Add Favorite Success',
+    props<{ favorite: Favorite }>()
 )
 
 export const addFavoriteFailure = createAction(
@@ -31,4 +31,19 @@ export const loadFavoritesFailure = createAction(
     '[Favorites] Load Favorites Failure',
     props<{ error: any }>()
 );
+
+export const removeFavorite = createAction(
+    '[Favorites] Remove Favorite',
+    props<{ favorite: Favorite }>()
+)
+
+export const removeFavoriteSuccess = createAction(
+    '[Favorites] Remove Favorite Success',
+    props<{ favorite: Favorite }>()
+)
+
+export const removeFavoriteFailure = createAction(
+    '[Favorites] Remove Favorite Failure',
+    props<{ error: any }>()
+)
 

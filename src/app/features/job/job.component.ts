@@ -36,7 +36,7 @@ export class JobComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private store: Store,
-    private userService: UserService,
+    public userService: UserService,
     private favotiteService: FavoriteService) {
   }
 

@@ -1,3 +1,4 @@
+import { removeFavorite } from './../../states/favorites/favorites.actions';
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
@@ -14,6 +15,7 @@ import { Favorite } from '../../core/models/favorite.model';
   styleUrl: './favorites.component.css'
 })
 export class FavoritesComponent implements OnInit {
+
   private store = inject(Store);
 
   favorites$: Observable<Favorite[]> = this.store.select(selectFavorites);
@@ -21,5 +23,9 @@ export class FavoritesComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(loadFavorites());
+  }
+
+  removeFromFavorites(favorite: Favorite) {
+    this.store.dispatch(removeFavorite({ favorite }))
   }
 }

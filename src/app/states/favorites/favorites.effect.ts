@@ -25,7 +25,7 @@ export class FavoritesEffects {
                         }
                         console.log(action.job.id + ' Added to favorites.');
                         return this.favoriteService.create(action.userId, action.job).pipe(
-                            map(favorite => FavoritesActions.addFavoriteSuccess({ job: favorite })),
+                            map(favorite => FavoritesActions.addFavoriteSuccess({ favorite })),
                             catchError(error => of(FavoritesActions.addFavoriteFailure({ error })))
                         );
                     }),
@@ -47,4 +47,15 @@ export class FavoritesEffects {
         )
     );
 
+    removeFavorite$ = createEffect((): Observable<Action> =>
+        this.actions$.pipe(
+            ofType(FavoritesActions.removeFavorite),
+            switchMap(action => this.favoriteService.delete(action.favorite).pipe(
+                map(() => FavoritesActions.removeFavoriteSuccess({ favorite: action.favorite })),
+                catchError(error => of(FavoritesActions.removeFavoriteFailure({ error })))
+            ))
+        )
+    )
+
 }
+

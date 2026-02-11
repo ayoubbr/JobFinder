@@ -31,4 +31,8 @@ export class FavoriteService {
   findByUserAndJob(userId: number, offerId: number): Observable<Favorite[]> {
     return this.http.get<Favorite[]>(`${this.url}?userId=${userId}&offerId=${offerId}`);
   }
+
+  delete(favorite: Favorite): Observable<any> {
+    return this.http.delete<any>(`${this.url}/${favorite.id}`);
+  }
 }
