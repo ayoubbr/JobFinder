@@ -4,6 +4,9 @@ import { Job } from '../../core/models/job.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { UserService } from '../../core/services/user.service';
+import { addFavorite } from '../../states/favorites/favorites.actions';
 
 @Component({
   selector: 'app-job',
@@ -27,10 +30,11 @@ export class JobComponent implements OnInit {
 
   isLoading = false;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private store: Store, private userService: UserService) {
   }
 
   ngOnInit(): void {
+    // this.isLoading = true;
     const jobs = this.route.snapshot.data['jobs'];
     this.allJobs = Array.isArray(jobs) ? jobs : [];
     this.applyFilters();
@@ -84,6 +88,11 @@ export class JobComponent implements OnInit {
 
     this.page = pageNumber;
     this.applyFilters();
+  }
+
+  addToFavorites(job: Job) {
+    const userId = this.userService.getCurrentUser()?.id!;
+    this.store.dispatch(addFavorite({ userId, job }))
   }
 
 }

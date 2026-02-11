@@ -19,7 +19,6 @@ export class JobService {
       params.location = location;
     }
 
-
     return this.http.get<JobResponse>(this.url, { params } );
   }
 

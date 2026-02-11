@@ -1,5 +1,22 @@
 {
-  "users": [],
-  "favoritesOffers": [],
+  "users": [
+    {
+      "firstName": "Ayoub",
+      "lastName": "Benmansour",
+      "email": "ayoub1benmansour@gmail.com",
+      "password": "1111",
+      "id": 1
+    }
+  ],
+  "favorites": [
+    {
+      "id": 1,
+      "userId": 1,
+      "offerId": 101,
+      "title": "Développeur Angular",
+      "company": "Entreprise A",
+      "location": "Casablanca"
+    }
+  ],
   "candidatures": []
 }

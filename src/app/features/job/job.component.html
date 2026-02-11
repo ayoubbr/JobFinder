@@ -37,7 +37,7 @@
             <a [href]="job.refs.landing_page" target="_blank">Voir l'offre</a>
             <!-- <div><a>Plus de details</a></div> -->
             <!-- if authentified -->
-            <div><button>Ajouter au Favoris</button></div>
+            <div><button (click)="addToFavorites(job)">Ajouter au Favoris</button></div>
             <div><button>Suivre cette candidature</button></div>
         </div>
         <hr>
