@@ -46,9 +46,9 @@
                     {{ isFavorite(job.id!, favoritesList) ? 'Retirer des Favoris' : 'Ajouter au Favoris' }}
                 </button>
             </div>
+            <div><button (click)="applyToJob(job)">Suivre cette candidature</button></div>
             }
 
-            <div><button>Suivre cette candidature</button></div>
 
         </div>
         <hr>

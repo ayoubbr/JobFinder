@@ -18,5 +18,45 @@
       "id": 1
     }
   ],
-  "candidatures": []
+  "applications": [
+    {
+      "userId": 1,
+      "offerId": 21242266,
+      "title": "GPU Energy Modeling and Analysis Engineer",
+      "company": "Apple",
+      "location": "Austin, TX",
+      "apiSource": "The Muse",
+      "url": "https://www.themuse.com/jobs/apple/gpu-energy-modeling-and-analysis-engineer-6702e6",
+      "status": "pending",
+      "notes": "Notes Will be Set By The User in the Future.",
+      "dateAdded": "2026-02-11T17:23:47.410Z",
+      "id": 1
+    },
+    {
+      "userId": 1,
+      "offerId": 21242266,
+      "title": "GPU Energy Modeling and Analysis Engineer",
+      "company": "Apple",
+      "location": "Austin, TX",
+      "apiSource": "The Muse",
+      "url": "https://www.themuse.com/jobs/apple/gpu-energy-modeling-and-analysis-engineer-6702e6",
+      "status": "pending",
+      "notes": "Notes Will be Set By The User in the Future.",
+      "dateAdded": "2026-02-11T17:24:27.313Z",
+      "id": 2
+    },
+    {
+      "userId": 1,
+      "offerId": 21242266,
+      "title": "GPU Energy Modeling and Analysis Engineer",
+      "company": "Apple",
+      "location": "Austin, TX",
+      "apiSource": "The Muse",
+      "url": "https://www.themuse.com/jobs/apple/gpu-energy-modeling-and-analysis-engineer-6702e6",
+      "status": "pending",
+      "notes": "Notes Will be Set By The User in the Future.",
+      "dateAdded": "2026-02-11T17:24:28.315Z",
+      "id": 3
+    }
+  ]
 }

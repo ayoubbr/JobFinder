@@ -10,6 +10,7 @@ import { addFavorite, loadFavorites, removeFavorite } from '../../states/favorit
 import { Favorite } from '../../core/models/favorite.model';
 import { selectFavorites } from '../../states/favorites/favorites.selector';
 import { Observable } from 'rxjs';
+import { ApplicationService } from '../../core/services/application.service';
 
 @Component({
   selector: 'app-job',
@@ -37,7 +38,7 @@ export class JobComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     public userService: UserService,
-    private favoriteService: FavoriteService) {
+    private applicationService: ApplicationService) {
   }
 
   ngOnInit(): void {
@@ -115,6 +116,18 @@ export class JobComponent implements OnInit {
   isFavorite(jobId: number, favorites: Favorite[] | null): boolean {
     if (!favorites) return false;
     return favorites.some(f => f.offerId === jobId);
+  }
+
+  applyToJob(job: Job) {
+    const currentUserId = this.userService.getCurrentUser()?.id;
+    this.applicationService.create(currentUserId!, job).subscribe({
+      next: () => {
+        console.log('Application added to this job : ', job.id);
+      },
+      error: (err) => {
+        console.error('Something went wrong: ', err);
+      }
+    })
   }
 
 }
