@@ -12,6 +12,15 @@ export const favotitesReducer = createReducer(
     })),
     on(FavoritesActions.addFavoriteFailure, (favoriteState, { error }) => ({
         ...favoriteState, loading: false, error
+    })),
+    on(FavoritesActions.loadFavorites, favoriteState => ({
+        ...favoriteState, loading: true
+    })),
+    on(FavoritesActions.loadFavoritesSuccess, (favoriteState, { favorites }) => ({
+        ...favoriteState, loading: false, favorites
+    })),
+    on(FavoritesActions.loadFavoritesFailure, (favoriteState, { error }) => ({
+        ...favoriteState, loading: false, error
     }))
 );
 

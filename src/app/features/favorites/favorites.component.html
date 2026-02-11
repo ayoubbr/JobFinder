@@ -1,0 +1,21 @@
+<div class="favorites-container">
+    <h2>My Favorites</h2>
+
+    <div *ngIf="loading$ | async" class="loading-spinner">
+        Loading favorites...
+    </div>
+
+    <div *ngIf="!(loading$ | async)">
+        <div *ngIf="(favorites$ | async)?.length === 0" class="no-favorites">
+            You haven't added any favorites yet.
+        </div>
+
+        <div class="favorites-list">
+            <div *ngFor="let job of favorites$ | async" class="favorite-card">
+                <h3>{{ job.title }}</h3>
+                <p class="company">{{ job.company }}</p>
+                <p class="location">{{ job.location }}</p>
+            </div>
+        </div>
+    </div>
+</div>

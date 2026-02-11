@@ -1,7 +1,7 @@
-import { Job } from "../../core/models/job.model";
+import { Favorite } from "../../core/models/favorite.model";
 
 export interface FavoritesState {
-    favorites: Job[],
+    favorites: Favorite[],
     loading: boolean,
     error: any
 }

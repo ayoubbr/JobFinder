@@ -32,5 +32,11 @@ export const routes: Routes = [
         path: 'jobs',
         loadComponent: () => import('./features/job/job.component').then(m => m.JobComponent),
         resolve: { jobs: JobsResolver }
+    },
+    {
+        path: 'favorites',
+        loadComponent: () => import('./features/favorites/favorites.component')
+            .then(m => m.FavoritesComponent),
+        canActivate: [authGuard]
     }
 ];

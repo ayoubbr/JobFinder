@@ -23,6 +23,11 @@
             <li>
                 <a routerLink="jobs">Jobs</a>
             </li>
+            @if (userService.isAuthenticated()) {
+            <li>
+                <a routerLink="favorites">Favorites</a>
+            </li>
+            }
         </ul>
     </nav>
 </header>

@@ -24,7 +24,6 @@ export class FavoriteService {
     return this.http.post<any>(this.url, payload);
   }
 
-
   getAll(): Observable<Favorite[]> {
     return this.http.get<Favorite[]>(this.url);
   }
@@ -32,6 +31,4 @@ export class FavoriteService {
   findByUserAndJob(userId: number, offerId: number): Observable<Favorite[]> {
     return this.http.get<Favorite[]>(`${this.url}?userId=${userId}&offerId=${offerId}`);
   }
-
-
 }

@@ -5,6 +5,7 @@ import { switchMap, map, catchError } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
 import * as FavoritesActions from './favorites.actions';
 import { FavoriteService } from '../../core/services/favorite.service';
+import { Job } from '../../core/models/job.model';
 
 
 @Injectable()
@@ -24,7 +25,7 @@ export class FavoritesEffects {
                         }
                         console.log(action.job.id + ' Added to favorites.');
                         return this.favoriteService.create(action.userId, action.job).pipe(
-                            map(() => FavoritesActions.addFavoriteSuccess({ job: action.job })),
+                            map(favorite => FavoritesActions.addFavoriteSuccess({ job: favorite })),
                             catchError(error => of(FavoritesActions.addFavoriteFailure({ error })))
                         );
                     }),
@@ -34,5 +35,16 @@ export class FavoritesEffects {
         )
     );
 
-}
+    loadFavorites$ = createEffect((): Observable<Action> =>
+        this.actions$.pipe(
+            ofType(FavoritesActions.loadFavorites),
+            switchMap(() =>
+                this.favoriteService.getAll().pipe(
+                    map(favorites => FavoritesActions.loadFavoritesSuccess({ favorites })),
+                    catchError(error => of(FavoritesActions.loadFavoritesFailure({ error })))
+                )
+            )
+        )
+    );
 
+}
