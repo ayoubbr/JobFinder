@@ -1,3 +1,4 @@
+import { Favorite } from './../models/favorite.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -23,6 +24,14 @@ export class FavoriteService {
     return this.http.post<any>(this.url, payload);
   }
 
+
+  getAll(): Observable<Favorite[]> {
+    return this.http.get<Favorite[]>(this.url);
+  }
+
+  findByUserAndJob(userId: number, offerId: number): Observable<Favorite[]> {
+    return this.http.get<Favorite[]>(`${this.url}?userId=${userId}&offerId=${offerId}`);
+  }
 
 
 }

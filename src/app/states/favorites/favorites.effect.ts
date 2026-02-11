@@ -16,13 +16,19 @@ export class FavoritesEffects {
         this.actions$.pipe(
             ofType(FavoritesActions.addFavorite),
             switchMap(action =>
-                this.favoriteService.create(action.userId, action.job.id!).pipe(
-                    map(() =>
-                        FavoritesActions.addFavoriteSuccess({ job: action.job })
-                    ),
-                    catchError(error =>
-                        of(FavoritesActions.addFavoriteFailure({ error }))
-                    )
+                this.favoriteService.findByUserAndJob(action.userId, action.job.id!).pipe(
+                    switchMap(existing => {
+                        if (existing.length > 0) {
+                            console.warn('Favorite already exists for this user and job');
+                            return of(FavoritesActions.addFavoriteFailure({ error: 'Already in favorites' }));
+                        }
+                        console.log(action.job.id + ' Added to favorites.');
+                        return this.favoriteService.create(action.userId, action.job).pipe(
+                            map(() => FavoritesActions.addFavoriteSuccess({ job: action.job })),
+                            catchError(error => of(FavoritesActions.addFavoriteFailure({ error })))
+                        );
+                    }),
+                    catchError(error => of(FavoritesActions.addFavoriteFailure({ error })))
                 )
             )
         )

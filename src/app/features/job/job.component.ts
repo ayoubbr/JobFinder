@@ -1,3 +1,5 @@
+import { favotitesReducer } from './../../states/favorites/favorites.reducer';
+import { FavoriteService } from './../../core/services/favorite.service';
 import { Component, NgModule, OnInit } from '@angular/core';
 import { JobService } from '../../core/services/job.service';
 import { Job } from '../../core/models/job.model';
@@ -7,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { UserService } from '../../core/services/user.service';
 import { addFavorite } from '../../states/favorites/favorites.actions';
+import { Favorite } from '../../core/models/favorite.model';
 
 @Component({
   selector: 'app-job',
@@ -29,8 +32,12 @@ export class JobComponent implements OnInit {
   totalPages = 0;
 
   isLoading = false;
+  favorites: Favorite[] = [];
 
-  constructor(private route: ActivatedRoute, private store: Store, private userService: UserService) {
+  constructor(private route: ActivatedRoute,
+    private store: Store,
+    private userService: UserService,
+    private favotiteService: FavoriteService) {
   }
 
   ngOnInit(): void {
@@ -92,7 +99,7 @@ export class JobComponent implements OnInit {
 
   addToFavorites(job: Job) {
     const userId = this.userService.getCurrentUser()?.id!;
-    this.store.dispatch(addFavorite({ userId, job }))
+    this.store.dispatch(addFavorite({ userId, job }));
   }
 
 }

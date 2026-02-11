@@ -10,12 +10,52 @@
   ],
   "favorites": [
     {
-      "id": 1,
       "userId": 1,
-      "offerId": 101,
-      "title": "Développeur Angular",
-      "company": "Entreprise A",
-      "location": "Casablanca"
+      "offerId": 21242266,
+      "title": "GPU Energy Modeling and Analysis Engineer",
+      "company": "Apple",
+      "location": "Austin, TX",
+      "id": 1
+    },
+    {
+      "userId": 1,
+      "offerId": 21262881,
+      "title": "Nordic Segment Leader - Life Sciences",
+      "company": "Schneider Electric",
+      "location": "Helsinki, Finland",
+      "id": 2
+    },
+    {
+      "userId": 1,
+      "offerId": 20674619,
+      "title": "Lead Administrator L1",
+      "company": "Wipro",
+      "location": "Hyderabad, India",
+      "id": 3
+    },
+    {
+      "userId": 1,
+      "offerId": 21232850,
+      "title": "Business Continuity Specialist",
+      "company": "PNC",
+      "location": "Denver, CO",
+      "id": 4
+    },
+    {
+      "userId": 1,
+      "offerId": 21239349,
+      "title": "Senior Insurance Risk Manager",
+      "company": "Leidos",
+      "location": "Reston, VA",
+      "id": 5
+    },
+    {
+      "userId": 1,
+      "offerId": 21200905,
+      "title": "TECHNO FUNCTIONAL CONSULTANT L2",
+      "company": "Wipro",
+      "location": "Pune, India",
+      "id": 6
     }
   ],
   "candidatures": []
