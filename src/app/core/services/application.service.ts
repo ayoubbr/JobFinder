@@ -27,4 +27,16 @@ export class ApplicationService {
     };
     return this.http.post<any>(this.url, payload);
   }
+
+  getAll(): Observable<any[]> {
+    return this.http.get<any[]>(this.url);
+  }
+
+  findByUserAndJob(userId: number, offerId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.url}?userId=${userId}&offerId=${offerId}`);
+  }
+
+  delete(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.url}/${id}`);
+  }
 }

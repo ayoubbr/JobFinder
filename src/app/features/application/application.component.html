@@ -1,0 +1,24 @@
+<div class="applications-container">
+    <h2>My Applications</h2>
+
+    <div *ngIf="isLoading" class="loading-spinner">
+        Loading applications...
+    </div>
+
+    <div *ngIf="!isLoading">
+        <div *ngIf="applications.length === 0" class="no-applications">
+            You haven't applied to any jobs yet.
+        </div>
+
+        <div class="applications-list">
+            <div *ngFor="let app of applications" class="application-card">
+                <h3>{{ app.title }}</h3>
+                <p class="company">{{ app.company }}</p>
+                <p class="location">{{ app.location }}</p>
+                <p class="status">Status: <strong>{{ app.status }}</strong></p>
+                <p class="date">Applied on: {{ app.dateAdded | date:'mediumDate' }}</p>
+                <button (click)="removeApplication(app.id)">Retirer ma candidature</button>
+            </div>
+        </div>
+    </div>
+</div>

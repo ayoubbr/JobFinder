@@ -35,6 +35,7 @@ export class JobComponent implements OnInit {
   private store = inject(Store);
   isLoading = false;
   favorites$: Observable<Favorite[]> = this.store.select(selectFavorites);
+  applications: any[] = [];
 
   constructor(private route: ActivatedRoute,
     public userService: UserService,
@@ -43,9 +44,19 @@ export class JobComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(loadFavorites());
+    this.loadUserApplications();
     const jobs = this.route.snapshot.data['jobs'];
     this.allJobs = Array.isArray(jobs) ? jobs : [];
     this.applyFilters();
+  }
+
+  loadUserApplications() {
+    const userId = this.userService.getCurrentUser()?.id;
+    if (userId) {
+      this.applicationService.getAll().subscribe(apps => {
+        this.applications = apps.filter(a => a.userId === userId);
+      });
+    }
   }
 
   applyFilters() {
@@ -118,16 +129,33 @@ export class JobComponent implements OnInit {
     return favorites.some(f => f.offerId === jobId);
   }
 
-  applyToJob(job: Job) {
+  toggleApplication(job: Job) {
     const currentUserId = this.userService.getCurrentUser()?.id;
-    this.applicationService.create(currentUserId!, job).subscribe({
-      next: () => {
-        console.log('Application added to this job : ', job.id);
-      },
-      error: (err) => {
-        console.error('Something went wrong: ', err);
-      }
-    })
+    if (!currentUserId) return;
+
+    const existingApp = this.applications.find(a => a.offerId === job.id);
+
+    if (existingApp) {
+      this.applicationService.delete(existingApp.id).subscribe({
+        next: () => {
+          this.applications = this.applications.filter(a => a.id !== existingApp.id);
+          console.log('Application removed for job : ', job.id);
+        },
+        error: (err) => console.error('Error removing application: ', err)
+      });
+    } else {
+      this.applicationService.create(currentUserId, job).subscribe({
+        next: (newApp) => {
+          this.applications.push(newApp);
+          console.log('Application added to this job : ', job.id);
+        },
+        error: (err) => console.error('Error adding application: ', err)
+      });
+    }
+  }
+
+  hasApplied(jobId: number): boolean {
+    return this.applications.some(a => a.offerId === jobId);
   }
 
 }

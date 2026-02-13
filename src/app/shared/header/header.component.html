@@ -10,22 +10,21 @@
             <li>
                 <a routerLink="login">Login</a>
             </li>
-            @if (userService.isAuthenticated()) {
-            <li>
-                <a routerLink="profile">Profile</a>
-            </li>
-            }
-            @if (userService.isAuthenticated()) {
-            <li>
-                <button type="button" (click)="logout()">Logout</button>
-            </li>
-            }
             <li>
                 <a routerLink="jobs">Jobs</a>
             </li>
             @if (userService.isAuthenticated()) {
             <li>
+                <a routerLink="profile">Profile</a>
+            </li>
+            <li>
                 <a routerLink="favorites">Favorites</a>
+            </li>
+            <li>
+                <a routerLink="applications">Applications</a>
+            </li>
+            <li>
+                <button type="button" (click)="logout()">Logout</button>
             </li>
             }
         </ul>

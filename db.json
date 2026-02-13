@@ -21,42 +21,29 @@
   "applications": [
     {
       "userId": 1,
-      "offerId": 21242266,
-      "title": "GPU Energy Modeling and Analysis Engineer",
-      "company": "Apple",
-      "location": "Austin, TX",
+      "offerId": 20674619,
+      "title": "Lead Administrator L1",
+      "company": "Wipro",
+      "location": "Hyderabad, India",
       "apiSource": "The Muse",
-      "url": "https://www.themuse.com/jobs/apple/gpu-energy-modeling-and-analysis-engineer-6702e6",
+      "url": "https://www.themuse.com/jobs/wipro/lead-administrator-l1-3a893d",
       "status": "pending",
       "notes": "Notes Will be Set By The User in the Future.",
-      "dateAdded": "2026-02-11T17:23:47.410Z",
-      "id": 1
-    },
-    {
-      "userId": 1,
-      "offerId": 21242266,
-      "title": "GPU Energy Modeling and Analysis Engineer",
-      "company": "Apple",
-      "location": "Austin, TX",
-      "apiSource": "The Muse",
-      "url": "https://www.themuse.com/jobs/apple/gpu-energy-modeling-and-analysis-engineer-6702e6",
-      "status": "pending",
-      "notes": "Notes Will be Set By The User in the Future.",
-      "dateAdded": "2026-02-11T17:24:27.313Z",
-      "id": 2
-    },
-    {
-      "userId": 1,
-      "offerId": 21242266,
-      "title": "GPU Energy Modeling and Analysis Engineer",
-      "company": "Apple",
-      "location": "Austin, TX",
-      "apiSource": "The Muse",
-      "url": "https://www.themuse.com/jobs/apple/gpu-energy-modeling-and-analysis-engineer-6702e6",
-      "status": "pending",
-      "notes": "Notes Will be Set By The User in the Future.",
-      "dateAdded": "2026-02-11T17:24:28.315Z",
+      "dateAdded": "2026-02-11T17:40:25.749Z",
       "id": 3
+    },
+    {
+      "userId": 1,
+      "offerId": 21262881,
+      "title": "Nordic Segment Leader - Life Sciences",
+      "company": "Schneider Electric",
+      "location": "Helsinki, Finland",
+      "apiSource": "The Muse",
+      "url": "https://www.themuse.com/jobs/schneiderelectric/nordic-segment-leader-life-sciences",
+      "status": "pending",
+      "notes": "Notes Will be Set By The User in the Future.",
+      "dateAdded": "2026-02-11T17:41:31.057Z",
+      "id": 4
     }
   ]
 }
