@@ -1,23 +1,52 @@
-<div class="applications-container">
-    <h2>My Applications</h2>
+<div class="applications-page container section-padding">
+    <header class="page-header">
+        <h1 class="section-title">My Applications</h1>
+        <p class="section-subtitle">Track and manage your journey to your next big move.</p>
+    </header>
 
-    <div *ngIf="isLoading" class="loading-spinner">
-        Loading applications...
+    <div *ngIf="isLoading" class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading your applications...</p>
     </div>
 
     <div *ngIf="!isLoading">
-        <div *ngIf="applications.length === 0" class="no-applications">
-            You haven't applied to any jobs yet.
+        <div *ngIf="applications.length === 0" class="empty-state">
+            <div class="empty-icon">📂</div>
+            <h3>No applications yet</h3>
+            <p>Start your search today and find jobs that match your potential.</p>
+            <a routerLink="/jobs" class="btn btn-primary mt-2">Browse Jobs</a>
         </div>
 
-        <div class="applications-list">
+        <div class="application-grid" *ngIf="applications.length > 0">
             <div *ngFor="let app of applications" class="application-card">
-                <h3>{{ app.title }}</h3>
-                <p class="company">{{ app.company }}</p>
-                <p class="location">{{ app.location }}</p>
-                <p class="status">Status: <strong>{{ app.status }}</strong></p>
-                <p class="date">Applied on: {{ app.dateAdded | date:'mediumDate' }}</p>
-                <button (click)="removeApplication(app.id)">Retirer ma candidature</button>
+                <div class="app-card-header">
+                    <div class="app-info">
+                        <h3 class="app-title">{{ app.title }}</h3>
+                        <p class="app-company">{{ app.company }}</p>
+                    </div>
+                    <div class="app-status-badge" [attr.data-status]="app.status">
+                        {{ app.status }}
+                    </div>
+                </div>
+
+                <div class="app-card-body">
+                    <div class="app-meta">
+                        <span class="meta-item"><span class="icon">📍</span> {{ app.location }}</span>
+                        <span class="meta-item"><span class="icon">📅</span> Applied: {{ app.dateAdded |
+                            date:'mediumDate' }}</span>
+                    </div>
+                </div>
+
+                <div class="app-card-footer">
+                    @if (app.status === 'pending') {
+                    <div class="status-actions">
+                        <button class="btn btn-success btn-sm" (click)="acceptApplication(app.id)">Accept</button>
+                        <button class="btn btn-danger btn-sm" (click)="rejectApplication(app.id)">Reject</button>
+                    </div>
+                    }
+                    <button class="btn btn-outline btn-sm danger" (click)="removeApplication(app.id)">Withdraw
+                        Application</button>
+                </div>
             </div>
         </div>
     </div>

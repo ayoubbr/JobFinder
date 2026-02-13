@@ -5,7 +5,6 @@ import { switchMap, map, catchError } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
 import * as FavoritesActions from './favorites.actions';
 import { FavoriteService } from '../../core/services/favorite.service';
-import { Job } from '../../core/models/job.model';
 
 
 @Injectable()

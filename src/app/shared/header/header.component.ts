@@ -1,11 +1,11 @@
 import { UserService } from './../../core/services/user.service';
 import { Component } from '@angular/core';
-import { Router, RouterLink } from "@angular/router";
+import { Router, RouterModule } from "@angular/router";
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })

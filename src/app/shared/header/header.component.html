@@ -1,32 +1,26 @@
-<header>
-    <nav>
-        <ul>
-            <li>
-                <a routerLink="">Home</a>
-            </li>
-            <li>
-                <a routerLink="register">Register</a>
-            </li>
-            <li>
-                <a routerLink="login">Login</a>
-            </li>
-            <li>
-                <a routerLink="jobs">Jobs</a>
-            </li>
+<header class="main-header">
+    <div class="container header-container">
+        <div class="logo">
+            <a routerLink="" class="logo-text">JOB<span class="dot">.</span></a>
+        </div>
+
+        <nav class="nav-links">
+            <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+            <a routerLink="jobs" routerLinkActive="active">Jobs</a>
             @if (userService.isAuthenticated()) {
-            <li>
-                <a routerLink="profile">Profile</a>
-            </li>
-            <li>
-                <a routerLink="favorites">Favorites</a>
-            </li>
-            <li>
-                <a routerLink="applications">Applications</a>
-            </li>
-            <li>
-                <button type="button" (click)="logout()">Logout</button>
-            </li>
+            <a routerLink="favorites" routerLinkActive="active">Favorites</a>
+            <a routerLink="applications" routerLinkActive="active">Applications</a>
+            <a routerLink="profile" routerLinkActive="active">Profile</a>
             }
-        </ul>
-    </nav>
+        </nav>
+
+        <div class="auth-buttons">
+            @if (!userService.isAuthenticated()) {
+            <a routerLink="login" class="btn btn-outline">Login</a>
+            <a routerLink="register" class="btn btn-primary">Sign Up</a>
+            } @else {
+            <button type="button" class="btn btn-outline" (click)="logout()">Logout</button>
+            }
+        </div>
+    </div>
 </header>

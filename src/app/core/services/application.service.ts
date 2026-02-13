@@ -39,4 +39,12 @@ export class ApplicationService {
   delete(id: number): Observable<any> {
     return this.http.delete<any>(`${this.url}/${id}`);
   }
+
+  reject(id: number): Observable<any> {
+    return this.http.patch<any>(`${this.url}/${id}`, { status: 'rejected' });
+  }
+
+  accept(id: number): Observable<any> {
+    return this.http.patch<any>(`${this.url}/${id}`, { status: 'accepted' });
+  }
 }

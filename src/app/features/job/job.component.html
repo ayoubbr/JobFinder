@@ -1,60 +1,94 @@
-<h2>Jobs</h2>
+<div class="jobs-page container section-padding">
+    <header class="page-header">
+        <h1 class="section-title">Explore Opportunities</h1>
+        <p class="section-subtitle">Find the perfect role that matches your skills and ambitions.</p>
+    </header>
 
-<div>
-    <div>
-        <input type="text" placeholder="Search by title" [(ngModel)]="filterByTitle"
-            (ngModelChange)="onFilterChange()" />
-    </div>
-    <div>
-        <input type="text" placeholder="Search by location" [(ngModel)]="filterByLocation"
-            (ngModelChange)="onFilterChange()">
-    </div>
-    <div>
-        <button (click)="goToPage(page - 1)" [disabled]="page === 0">Prev</button>
-        <span>Page {{page + 1}} / {{totalPages}}</span>
-        <button (click)="goToPage(page + 1)" [disabled]="page + 1 >= totalPages">Next</button>
-    </div>
-
-    <div *ngIf="isLoading" class="loading">
-        Loading jobs...
-    </div>
-
-
-    <div *ngIf="!isLoading">
-        @for (job of jobs; track job.id) {
-        <div>
-            <h3>{{job.name}}</h3>
-            <!-- <div [innerHTML]="job.contents"></div> -->
-
-            <p>Company: {{job.company.name}}</p>
-
-            <div>Locations: [@for (location of job.locations; track $index; let isLast = $last) {
-                <span>
-                    {{location.name}}
-                    @if(!isLast){|}
-                </span>
-                }]
+    <div class="jobs-layout">
+        <!-- Sidebar Filters -->
+        <aside class="filters-sidebar">
+            <div class="filter-group">
+                <label>Search by Title</label>
+                <div class="input-wrapper">
+                    <input type="text" placeholder="Job title, keywords..." [(ngModel)]="filterByTitle"
+                        (ngModelChange)="onFilterChange()" />
+                </div>
             </div>
 
-            <p>Date de publication: {{job.publication_date | date:'fullDate'}}</p>
-
-            <a [href]="job.refs.landing_page" target="_blank">Voir l'offre</a>
-
-            @if (userService.isAuthenticated()) {
-            <div *ngIf="favorites$ | async as favoritesList">
-                <button (click)="toggleFavorite(job, favoritesList)">
-                    {{ isFavorite(job.id!, favoritesList) ? 'Retirer des Favoris' : 'Ajouter au Favoris' }}
-                </button>
+            <div class="filter-group">
+                <label>Location</label>
+                <div class="input-wrapper">
+                    <input type="text" placeholder="City, country..." [(ngModel)]="filterByLocation"
+                        (ngModelChange)="onFilterChange()">
+                </div>
             </div>
-            <div>
-                <button (click)="toggleApplication(job)">
-                    {{ hasApplied(job.id!) ? 'Retirer ma candidature' : 'Suivre cette candidature' }}
-                </button>
+
+            <div class="pagination-controls">
+                <button class="btn btn-secondary btn-sm" (click)="goToPage(page - 1)"
+                    [disabled]="page === 0">Prev</button>
+                <span class="page-info">Page {{page + 1}} / {{totalPages}}</span>
+                <button class="btn btn-secondary btn-sm" (click)="goToPage(page + 1)"
+                    [disabled]="page + 1 >= totalPages">Next</button>
             </div>
-            }
-        </div>
-        <hr>
-        }
+        </aside>
+
+        <!-- Job Listings -->
+        <main class="jobs-content">
+            <div *ngIf="isLoading" class="loading-state">
+                <div class="spinner"></div>
+                <p>Searching for best opportunities...</p>
+            </div>
+
+            <div *ngIf="!isLoading" class="job-grid">
+                @for (job of jobs; track job.id) {
+                <article class="job-card">
+                    <div class="job-card-header">
+                        <div class="company-logo">{{job.company.name.charAt(0)}}</div>
+                        <div class="job-info">
+                            <h3 class="job-title">{{job.name}}</h3>
+                            <p class="company-name">{{job.company.name}}</p>
+                        </div>
+                        @if (userService.isAuthenticated()) {
+                        <div *ngIf="favorites$ | async as favoritesList" class="favorite-action">
+                            <button class="icon-btn" (click)="toggleFavorite(job, favoritesList)"
+                                [class.is-favorite]="isFavorite(job.id!, favoritesList)">
+                                <span class="heart-icon">♥</span>
+                            </button>
+                        </div>
+                        }
+                    </div>
+
+                    <div class="job-card-body">
+                        <div class="job-meta">
+                            <span class="meta-item">
+                                <span class="icon">📍</span>
+                                @for (location of job.locations; track $index; let isLast = $last) {
+                                {{location.name}}@if(!isLast){, }
+                                }
+                            </span>
+                            <span class="meta-item">
+                                <span class="icon">📅</span>
+                                {{job.publication_date | date:'mediumDate'}}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="job-card-footer">
+                        <a [href]="job.refs.landing_page" target="_blank" class="btn btn-outline btn-sm">View
+                            Details</a>
+                        @if (userService.isAuthenticated()) {
+                        <button class="btn btn-primary btn-sm" (click)="toggleApplication(job)">
+                            {{ hasApplied(job.id!) ? 'Applied' : 'Apply Now' }}
+                        </button>
+                        }
+                    </div>
+                </article>
+                } @empty {
+                <div class="empty-state">
+                    <p>No jobs found matching your search criteria.</p>
+                </div>
+                }
+            </div>
+        </main>
     </div>
-
 </div>

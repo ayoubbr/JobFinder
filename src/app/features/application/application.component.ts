@@ -46,4 +46,30 @@ export class ApplicationComponent implements OnInit {
       error: (err) => console.error('Error removing application:', err)
     });
   }
+
+  acceptApplication(id: number) {
+    this.applicationService.accept(id).subscribe({
+      next: (updatedApp) => {
+        const index = this.applications.findIndex(app => app.id === id);
+        if (index !== -1) {
+          this.applications[index].status = 'accepted';
+        }
+        console.log("Job with id: " + id + " is Accepted");
+      },
+      error: (err) => console.error('Error accepting application:', err)
+    });
+  }
+
+  rejectApplication(id: number) {
+    this.applicationService.reject(id).subscribe({
+      next: (updatedApp) => {
+        const index = this.applications.findIndex(app => app.id === id);
+        if (index !== -1) {
+          this.applications[index].status = 'rejected';
+        }
+        console.log("Job with id: " + id + " is Rejected");
+      },
+      error: (err) => console.error('Error rejecting application:', err)
+    });
+  }
 }

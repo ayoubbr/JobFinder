@@ -1,21 +1,47 @@
-<div class="favorites-container">
-    <h2>My Favorites</h2>
+<div class="favorites-page container section-padding">
+    <header class="page-header">
+        <h1 class="section-title">Saved Opportunities</h1>
+        <p class="section-subtitle">A collection of roles you're interested in.</p>
+    </header>
 
-    <div *ngIf="loading$ | async" class="loading-spinner">
-        Loading favorites...
+    <div *ngIf="loading$ | async" class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading your favorites...</p>
     </div>
 
     <div *ngIf="!(loading$ | async)">
-        <div *ngIf="(favorites$ | async)?.length === 0" class="no-favorites">
-            You haven't added any favorites yet.
+        <div *ngIf="(favorites$ | async)?.length === 0" class="empty-state">
+            <div class="empty-icon">♥</div>
+            <h3>No favorites yet</h3>
+            <p>Save jobs you like and find them here later.</p>
+            <a routerLink="/jobs" class="btn btn-primary mt-2">Explore Jobs</a>
         </div>
 
-        <div class="favorites-list">
-            <div *ngFor="let job of favorites$ | async" class="favorite-card">
-                <h3>{{ job.title }}</h3>
-                <p class="company">{{ job.company }}</p>
-                <p class="location">{{ job.location }}</p>
-                <button (click)="removeFromFavorites(job)">Remove from Favorites</button>
+        <div class="job-grid" *ngIf="(favorites$ | async)?.length! > 0">
+            <div *ngFor="let job of favorites$ | async" class="job-card">
+                <div class="job-card-header">
+                    <div class="company-logo">{{job.company.charAt(0)}}</div>
+                    <div class="job-info">
+                        <h3 class="job-title">{{ job.title }}</h3>
+                        <p class="company-name">{{ job.company }}</p>
+                    </div>
+                    <div class="favorite-action">
+                        <button class="icon-btn is-favorite" (click)="removeFromFavorites(job)">
+                            <span class="heart-icon">♥</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="job-card-body">
+                    <div class="job-meta">
+                        <span class="meta-item"><span class="icon">📍</span> {{ job.location }}</span>
+                    </div>
+                </div>
+
+                <div class="job-card-footer">
+                    <button class="btn btn-outline btn-sm danger" (click)="removeFromFavorites(job)">Remove</button>
+                    <a routerLink="/jobs" class="btn btn-primary btn-sm">View Jobs</a>
+                </div>
             </div>
         </div>
     </div>

@@ -1,42 +1,47 @@
-<h2>Login Form</h2>
-
-<form [formGroup]="loginForm" (ngSubmit)="login()">
-
-    <div>
-        <label for="email">Email</label>
-        <input type="email" formControlName="email" />
-        @if (loginForm.controls['email'].invalid &&(
-        loginForm.controls['email'].dirty || loginForm.controls['email'].touched)) {
-        <div>
-            @if (loginForm.controls['email'].errors?.['required']) {
-            <span>Email is required</span>
-            }
-            @if (loginForm.controls['email'].errors?.['email']) {
-            <span>Email format is invalid</span>
-            }
+<div class="auth-page container section-padding">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1 class="auth-title">Welcome Back</h1>
+            <p class="auth-subtitle">Login to your account to continue your journey.</p>
         </div>
-        }
+
+        <form [formGroup]="loginForm" (ngSubmit)="login()" class="auth-form">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <div class="input-wrapper">
+                    <input type="email" id="email" formControlName="email" placeholder="name@company.com" />
+                </div>
+                @if (loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty ||
+                loginForm.controls['email'].touched)) {
+                <div class="error-msg">
+                    @if (loginForm.controls['email'].errors?.['required']) { <span>Email is required</span> }
+                    @if (loginForm.controls['email'].errors?.['email']) { <span>Please enter a valid email</span> }
+                </div>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-wrapper">
+                    <input type="password" id="password" formControlName="password" placeholder="••••••••" />
+                </div>
+                @if (loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty ||
+                loginForm.controls['password'].touched)) {
+                <div class="error-msg">
+                    @if (loginForm.controls['password'].errors?.['required']) { <span>Password is required</span> }
+                    @if (loginForm.controls['password'].errors?.['minlength']) { <span>Password must be at least 6
+                        characters</span> }
+                </div>
+                }
+            </div>
+
+            <div class="form-footer">
+                <button type="submit" class="btn btn-primary full-width" [disabled]="loginForm.invalid">Login</button>
+            </div>
+
+            <p class="auth-redirect">
+                Don't have an account? <a routerLink="/register">Sign up for free</a>
+            </p>
+        </form>
     </div>
-
-    <div>
-        <label for="password">Password</label>
-        <input type="password" formControlName="password" />
-        @if (loginForm.controls['password'].invalid &&(
-        loginForm.controls['password'].dirty || loginForm.controls['password'].touched)) {
-        <div>
-            @if (loginForm.controls['password'].errors?.['required']) {
-            <span>Password is required</span>
-            }
-            @if (loginForm.controls['password'].errors?.['minlength']) {
-            <span>Password is invalid</span>
-            }
-            @if (loginForm.controls['password'].errors?.['maxlength']) {
-            <span>Password is invalid</span>
-            }
-        </div>
-        }
-    </div>
-
-    <button type="submit">Login</button>
-
-</form>
+</div>
