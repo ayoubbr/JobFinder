@@ -56,8 +56,12 @@
 
             <div class="form-group">
                 <label for="password">Password</label>
-                <div class="input-wrapper">
-                    <input id="password" type="password" formControlName="password" placeholder="••••••••">
+                <div class="input-wrapper password-wrapper">
+                    <input id="password" [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                        placeholder="••••••••">
+                    <button type="button" class="password-toggle" (click)="toggleShowPassword()">
+                        <i class="fa-solid" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"></i>
+                    </button>
                 </div>
                 @if (profileForm.controls['password'].invalid && (profileForm.controls['password'].touched ||
                 profileForm.controls['password'].dirty)) {

@@ -4,8 +4,22 @@
       "firstName": "Ayoub",
       "lastName": "Benmansour",
       "email": "ayoub1benmansour@gmail.com",
-      "password": "1111",
+      "password": "U2FsdGVkX18lHNf3QjdfEXKnYQxQ5956OelkRV6PoNk=",
       "id": 1
+    },
+    {
+      "firstName": "Fugit aperiam et co",
+      "lastName": "Voluptates eum error",
+      "email": "vodaxinufy@mailinator.com",
+      "password": "U2FsdGVkX19KxRGc880ZoGaSY/pkRg/Ab3gUNiLbpCM=",
+      "id": 2
+    },
+    {
+      "firstName": "Louis",
+      "lastName": "Excetra",
+      "email": "lohala@mailinator.com",
+      "password": "U2FsdGVkX1/a3HVnb4fUDjl0mUPLxtC0ClTsvU3QGIY=",
+      "id": 3
     }
   ],
   "favorites": [

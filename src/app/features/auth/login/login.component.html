@@ -22,8 +22,12 @@
 
             <div class="form-group">
                 <label for="password">Password</label>
-                <div class="input-wrapper">
-                    <input type="password" id="password" formControlName="password" placeholder="••••••••" />
+                <div class="input-wrapper password-wrapper">
+                    <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="password"
+                        placeholder="••••••••" />
+                    <button type="button" class="password-toggle" (click)="toggleShowPassword()">
+                        <i class="fa-solid" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"></i>
+                    </button>
                 </div>
                 @if (loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty ||
                 loginForm.controls['password'].touched)) {

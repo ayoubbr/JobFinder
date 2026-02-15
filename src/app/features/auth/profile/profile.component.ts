@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit {
 
   profileForm!: FormGroup;
   currentUser!: User;
+  showPassword = false;
 
   constructor(private fb: FormBuilder,
     private userService: UserService,
@@ -24,6 +25,8 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.userService.getCurrentUser()!;
+
+    const decryptedPassword = this.userService.decryptPassword(this.currentUser.password);
 
     this.profileForm = this.fb.group({
       firstName: [
@@ -39,7 +42,7 @@ export class ProfileComponent implements OnInit {
         [Validators.required, Validators.email]
       ],
       password: [
-        this.currentUser.password,
+        decryptedPassword,
         [Validators.required, Validators.minLength(4), Validators.maxLength(12)]
       ]
     });
@@ -52,9 +55,14 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
+    const formValue = this.profileForm.value;
+
+    const encryptedPassword = this.userService.encryptPassword(formValue.password);
+
     const updatedUser: User = {
       ...this.currentUser,
-      ...this.profileForm.value
+      ...formValue,
+      password: encryptedPassword
     };
 
     this.userService.updateUser(updatedUser).subscribe({
@@ -81,5 +89,7 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
+  }
 }

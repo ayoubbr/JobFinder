@@ -56,6 +56,34 @@ button {
   padding: 0 2rem;
 }
 
+.password-wrapper {
+  position: relative;
+  display: flex !important;
+  align-items: center;
+}
+
+.password-wrapper input {
+  padding-right: 3rem !important;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: var(--fg-muted);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  z-index: 10;
+}
+
+.password-toggle:hover {
+  color: var(--primary);
+}
+
 .btn {
   padding: 0.75rem 1.5rem;
   border-radius: 9999px;

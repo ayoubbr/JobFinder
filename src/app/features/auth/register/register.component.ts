@@ -14,6 +14,7 @@ import { LocalStorageService } from '../../../core/services/local-storage.servic
 export class RegisterComponent implements OnInit {
 
   registerForm!: FormGroup;
+  showPassword = false;
 
   constructor(private fb: FormBuilder,
     private userService: UserService,
@@ -55,6 +56,10 @@ export class RegisterComponent implements OnInit {
         }
       }
     );
+  }
+
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
   }
 
 }

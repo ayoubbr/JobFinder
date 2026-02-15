@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
+  showPassword = false;
 
   constructor(private userService: UserService,
     private fb: FormBuilder,
@@ -38,5 +39,9 @@ export class LoginComponent implements OnInit {
         alert(err.message);
       }
     })
+  }
+
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
   }
 }
