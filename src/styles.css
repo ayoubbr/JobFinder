@@ -94,6 +94,12 @@ button {
   gap: 0.5rem;
 }
 
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(1);
+}
+
 .btn-primary {
   background-color: var(--primary);
   color: var(--bg-dark);
