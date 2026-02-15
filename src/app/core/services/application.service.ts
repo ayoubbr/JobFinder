@@ -12,15 +12,15 @@ export class ApplicationService {
   constructor(private http: HttpClient) { }
 
 
-  create(userId: number, job: any): Observable<any> {
+  create(userId: number, item: any): Observable<any> {
     const payload = {
       userId,
-      offerId: job.id,
-      title: job.name,
-      company: job.company?.name,
-      location: job.locations?.[0]?.name,
+      offerId: item.offerId || item.id,
+      title: item.title || item.name,
+      company: item.company?.name || item.company,
+      location: item.locations?.[0]?.name || item.location,
       apiSource: "The Muse",
-      url: job.refs?.landing_page,
+      url: item.refs?.landing_page || item.url || "",
       status: "pending",
       notes: "Notes Will be Set By The User in the Future.",
       dateAdded: new Date()

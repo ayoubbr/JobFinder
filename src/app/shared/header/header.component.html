@@ -16,10 +16,10 @@
 
         <div class="auth-buttons">
             @if (!userService.isAuthenticated()) {
-            <a routerLink="login" class="btn btn-outline">Login</a>
-            <a routerLink="register" class="btn btn-primary">Sign Up</a>
+            <a routerLink="login" class="btn btn-outline btn-sm">Login</a>
+            <a routerLink="register" class="btn btn-primary btn-sm">Sign Up</a>
             } @else {
-            <button type="button" class="btn btn-outline" (click)="logout()">Logout</button>
+            <button type="button" class="btn btn-outline btn-sm" (click)="logout()">Logout</button>
             }
         </div>
     </div>

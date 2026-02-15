@@ -81,7 +81,8 @@
 
 .job-card-footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+    gap: 1rem;
     align-items: center;
     padding-top: 1.5rem;
     border-top: 1px solid var(--border);

@@ -39,10 +39,10 @@
 
                 <div class="app-card-footer">
                     @if (app.status === 'pending') {
-                    <div class="status-actions">
+                    <!-- <div class="status-actions"> -->
                         <button class="btn btn-success btn-sm" (click)="acceptApplication(app.id)">Accept</button>
                         <button class="btn btn-danger btn-sm" (click)="rejectApplication(app.id)">Reject</button>
-                    </div>
+                    <!-- </div> -->
                     }
                     <button class="btn btn-outline btn-sm danger" (click)="removeApplication(app.id)">Withdraw
                         Application</button>
