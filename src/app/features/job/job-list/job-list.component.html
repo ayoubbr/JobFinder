@@ -1,0 +1,56 @@
+<div class="jobs-page container section-padding">
+    <header class="page-header">
+        <h1 class="section-title">Explore Opportunities</h1>
+        <p class="section-subtitle">Find the perfect role that matches your skills and ambitions.</p>
+    </header>
+
+    <div class="jobs-layout">
+        <!-- Sidebar Filters -->
+        <aside class="filters-sidebar">
+            <div class="filter-group">
+                <label>Search by Title</label>
+                <div class="input-wrapper">
+                    <input type="text" placeholder="Job title, keywords..." [(ngModel)]="filterByTitle"
+                        (ngModelChange)="onFilterChange()" />
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label>Location</label>
+                <div class="input-wrapper">
+                    <input type="text" placeholder="City, country..." [(ngModel)]="filterByLocation"
+                        (ngModelChange)="onFilterChange()">
+                </div>
+            </div>
+
+            <div class="pagination-controls">
+                <button class="btn btn-secondary btn-sm" (click)="goToPage(page - 1)"
+                    [disabled]="page === 0">Prev</button>
+                <span class="page-info">Page {{page + 1}} / {{totalPages}}</span>
+                <button class="btn btn-secondary btn-sm" (click)="goToPage(page + 1)"
+                    [disabled]="page + 1 >= totalPages">Next</button>
+            </div>
+        </aside>
+
+        <!-- Job Listings -->
+        <main class="jobs-content">
+            <div *ngIf="isLoading" class="loading-state">
+                <div class="spinner"></div>
+                <p>Searching for best opportunities...</p>
+            </div>
+
+            <div *ngIf="!isLoading" class="job-grid">
+                @for (job of jobs; track job.id) {
+                <app-job-item [job]="job" [isAuthenticated]="userService.isAuthenticated()"
+                    [isFavorite]="isFavorite(job.id!, favorites)" [hasApplied]="hasApplied(job.id!)"
+                    [toggleFavorite]="onToggleFavorite" [toggleApplication]="onToggleApplication"></app-job-item>
+
+                } @empty {
+                <div class="empty-state">
+                    <p>No jobs found matching your search criteria.</p>
+                </div>
+                }
+            </div>
+        </main>
+    </div>
+</div>

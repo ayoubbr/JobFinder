@@ -1,0 +1,49 @@
+<article class="job-card">
+
+    <div class="job-card-header">
+        <div class="company-logo">
+            {{ job.company.name.charAt(0) }}
+        </div>
+
+        <div class="job-info">
+            <h3 class="job-title">{{ job.name }}</h3>
+            <p class="company-name">{{ job.company.name }}</p>
+        </div>
+
+        @if (isAuthenticated) {
+        <div class="favorite-action">
+            <button class="icon-btn" (click)="toggleFavorite(job)" [class.is-favorite]="isFavorite">
+                <span class="heart-icon">♥</span>
+            </button>
+        </div>
+        }
+    </div>
+
+    <div class="job-card-body">
+        <div class="job-meta">
+            <span class="meta-item">
+                📍
+                @for (location of job.locations; track $index; let isLast = $last) {
+                {{ location.name }}@if(!isLast){, }
+                }
+            </span>
+
+            <span class="meta-item">
+                📅 {{ job.publication_date | date:'mediumDate' }}
+            </span>
+        </div>
+    </div>
+
+    <div class="job-card-footer">
+        <a [href]="job.refs.landing_page" target="_blank" class="btn btn-outline btn-sm">
+            View Details
+        </a>
+
+        @if (isAuthenticated) {
+        <button class="btn btn-primary btn-sm" (click)="toggleApplication(job)">
+            {{ hasApplied ? 'Applied' : 'Apply Now' }}
+        </button>
+        }
+    </div>
+
+</article>

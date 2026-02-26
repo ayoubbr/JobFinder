@@ -3,23 +3,23 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { UserService } from '../../core/services/user.service';
-import { FavoriteService } from '../../core/services/favorite.service';
-import { Job } from '../../core/models/job.model';
-import { addFavorite, loadFavorites, removeFavorite } from '../../states/favorites/favorites.actions';
-import { Favorite } from '../../core/models/favorite.model';
-import { selectFavorites } from '../../states/favorites/favorites.selector';
+import { JobItemComponent } from '../job-item/job-item.component';
+import { Job } from '../../../core/models/job.model';
 import { Observable } from 'rxjs';
-import { ApplicationService } from '../../core/services/application.service';
+import { Favorite } from '../../../core/models/favorite.model';
+import { UserService } from '../../../core/services/user.service';
+import { ApplicationService } from '../../../core/services/application.service';
+import { selectFavorites } from '../../../states/favorites/favorites.selector';
+import { addFavorite, loadFavorites, removeFavorite } from '../../../states/favorites/favorites.actions';
 
 @Component({
-  selector: 'app-job',
+  selector: 'app-job-list',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './job.component.html',
-  styleUrl: './job.component.css'
+  imports: [CommonModule, FormsModule, JobItemComponent],
+  templateUrl: './job-list.component.html',
+  styleUrl: './job-list.component.css'
 })
-export class JobComponent implements OnInit {
+export class JobListComponent {
 
   jobs: Job[] = [];
   allJobs: Job[] = [];
@@ -37,6 +37,8 @@ export class JobComponent implements OnInit {
   favorites$: Observable<Favorite[]> = this.store.select(selectFavorites);
   applications: any[] = [];
 
+  favorites: Favorite[] = [];
+
   constructor(private route: ActivatedRoute,
     public userService: UserService,
     private applicationService: ApplicationService) {
@@ -44,6 +46,12 @@ export class JobComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(loadFavorites());
+
+
+    this.favorites$.subscribe(favs => {
+      this.favorites = favs ?? [];
+    });
+
     this.loadUserApplications();
     const jobs = this.route.snapshot.data['jobs'];
     this.allJobs = Array.isArray(jobs) ? jobs : [];
@@ -109,10 +117,8 @@ export class JobComponent implements OnInit {
     this.applyFilters();
   }
 
-  toggleFavorite(job: Job, favorites: Favorite[] | null) {
-    if (!favorites) return;
-
-    const existingFavorite = favorites.find(f => f.offerId === job.id);
+  toggleFavorite = (job: Job) => {
+    const existingFavorite = this.favorites.find(f => f.offerId === job.id);
     const userId = this.userService.getCurrentUser()?.id;
 
     if (!userId) return;
@@ -122,8 +128,9 @@ export class JobComponent implements OnInit {
     } else {
       this.store.dispatch(addFavorite({ userId, job }));
     }
-  }
+  };
 
+  
   isFavorite(jobId: number, favorites: Favorite[] | null): boolean {
     if (!favorites) return false;
     return favorites.some(f => f.offerId === jobId);
@@ -158,4 +165,26 @@ export class JobComponent implements OnInit {
     return this.applications.some(a => a.offerId === jobId);
   }
 
+  onToggleFavorite = (job: Job) => {
+    this.favorites$.subscribe(favorites => {
+      if (!favorites) return;
+
+      const existingFavorite = favorites.find(f => f.offerId === job.id);
+      const userId = this.userService.getCurrentUser()?.id;
+
+      if (!userId) return;
+
+      if (existingFavorite) {
+        this.store.dispatch(removeFavorite({ favorite: existingFavorite }));
+      } else {
+        this.store.dispatch(addFavorite({ userId, job }));
+      }
+    }).unsubscribe();
+  };
+
+  onToggleApplication = (job: Job) => {
+    this.toggleApplication(job);
+  };
+
 }
+
