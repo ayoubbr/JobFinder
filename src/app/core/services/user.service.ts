@@ -5,7 +5,7 @@ import { map, Observable, switchMap } from 'rxjs';
 import { User } from '../models/user.model';
 import * as CryptoJS from 'crypto-js';
 
-const SECRET_KEY = 'job-finder-secret-key'; 
+const SECRET_KEY = 'job-finder-secret-key';
 
 @Injectable({
   providedIn: 'root'
@@ -96,4 +96,11 @@ export class UserService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.url}/${id}`);
   }
+
+
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.url);
+  }
+
+
 }

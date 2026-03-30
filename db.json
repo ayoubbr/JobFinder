@@ -4,7 +4,7 @@
       "firstName": "ayoub",
       "lastName": "benmansour",
       "email": "ayoub1benmansour@gmail.com",
-      "password": "U2FsdGVkX18wZcy9cY+HcWSezKB8EEh4OUH3U5gxzqc=", 
+      "password": "U2FsdGVkX18wZcy9cY+HcWSezKB8EEh4OUH3U5gxzqc=",
       "id": 1
     }
   ],
@@ -24,22 +24,17 @@
       "company": "TD Bank",
       "location": "Montreal, Canada",
       "id": 3
+    },
+    {
+      "userId": 1,
+      "offerId": 21287217,
+      "title": "Senior Manager Software Engineering",
+      "company": "JPMorgan Chase",
+      "location": "Hyderabad, India",
+      "id": 4
     }
   ],
   "applications": [
-    {
-      "userId": 1,
-      "offerId": 21331513,
-      "title": "Senior Principal, AI Data Governance",
-      "company": "Equinix, Inc",
-      "location": "Dallas, TX",
-      "apiSource": "The Muse",
-      "url": "https://www.themuse.com/jobs/equinixinc/senior-principal-ai-data-governance",
-      "status": "accepted",
-      "notes": "Notes Will be Set By The User in the Future.",
-      "dateAdded": "2026-02-26T09:56:43.358Z",
-      "id": 6
-    },
     {
       "userId": 1,
       "offerId": 21329884,
@@ -52,6 +47,32 @@
       "notes": "Notes Will be Set By The User in the Future.",
       "dateAdded": "2026-02-26T09:56:45.908Z",
       "id": 7
+    },
+    {
+      "userId": 1,
+      "offerId": 21287217,
+      "title": "Senior Manager Software Engineering",
+      "company": "JPMorgan Chase",
+      "location": "Hyderabad, India",
+      "apiSource": "The Muse",
+      "url": "https://www.themuse.com/jobs/jpmorganchase/senior-manager-software-engineering-567d7e",
+      "status": "accepted",
+      "notes": "Notes Will be Set By The User in the Future.",
+      "dateAdded": "2026-02-26T11:46:49.044Z",
+      "id": 8
+    },
+    {
+      "userId": 1,
+      "offerId": 21331513,
+      "title": "Senior Principal, AI Data Governance",
+      "company": "Equinix, Inc",
+      "location": "Dallas, TX",
+      "apiSource": "The Muse",
+      "url": "https://www.themuse.com/jobs/equinixinc/senior-principal-ai-data-governance",
+      "status": "accepted",
+      "notes": "Notes Will be Set By The User in the Future.",
+      "dateAdded": "2026-02-26T11:48:17.960Z",
+      "id": 9
     }
   ]
 }
